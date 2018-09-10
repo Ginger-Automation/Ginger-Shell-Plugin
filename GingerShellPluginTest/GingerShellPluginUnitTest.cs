@@ -15,7 +15,7 @@ namespace GingerShellPluginTest
             GingerAction GA = new GingerAction();
 
             //Act
-            service.RunShell(GA, "1234");
+            service.RunShell(GA, "dir");
 
             //Assert
             Assert.AreEqual(null, GA.Errors, "No Errors");

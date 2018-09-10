@@ -12,21 +12,21 @@ namespace GingerShellPlugin
         [GingerAction("RunShell", "Run OS Shell Command")]
         public void RunShell(IGingerAction GA, string commandStr)
         {
-            string output;
+            string retOutput;
 
-            string curOS = OperatingSystem.GetCurrentOS();
+            //string curOS = OperatingSystem.GetCurrentOS();
 
-            switch(curOS)
-            {
-                case "mac":
-                    break;
-                case "win":
-                    break;
-                case "unx":
-                    break;
-                default:
-                    break;
-            }
+            //switch(curOS)
+            //{
+            //    case "mac":
+            //        break;
+            //    case "win":
+            //        break;
+            //    case "unix":
+            //        break;
+            //    default:
+            //        break;
+            //}
 
             if (OperatingSystem.IsMacOS())
             {
@@ -37,12 +37,13 @@ namespace GingerShellPlugin
             {
                 //linux code
                 Console.WriteLine("Linux Operating System!");
+                retOutput = Execute(@"\usr\bin\bash", "ls");
             }
             else if (OperatingSystem.IsWindows())
             {
                 //windows code
                 Console.WriteLine("Windows Operating System!");
-                output = Execute(@"C:\Windows\System32\cmd.exe", "ipconfig");
+                retOutput = Execute(@"C:\Windows\System32\cmd.exe", commandStr);
             }
 
             //Console.WriteLine("Starting PACT server at port: " + port);
@@ -62,7 +63,7 @@ namespace GingerShellPlugin
             //Console.WriteLine("PACT Server started");
 
             // code to run on the shell
-            string retOutput = Execute(@"C:\Windows\System32\cmd.exe", @"/c dir \windows", true, true, false);
+            //string retOutput = Execute(@"C:\Windows\System32\cmd.exe", @"/c dir \windows", true, true, false);
         }       
 
 
