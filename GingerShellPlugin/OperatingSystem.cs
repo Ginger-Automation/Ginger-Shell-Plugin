@@ -6,7 +6,6 @@ namespace GingerShellPlugin
     public static class OperatingSystem
     {
 
-
         public static bool IsWindows() =>
             RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
@@ -24,7 +23,6 @@ namespace GingerShellPlugin
             (IsLinux() ? "unix" : null);
         }
     }
-
 
 
     //public static void DetermineOS()
