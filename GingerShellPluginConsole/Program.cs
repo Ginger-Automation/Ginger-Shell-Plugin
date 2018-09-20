@@ -14,7 +14,7 @@ namespace GingerShellPluginConsole
             FileService fileService = new FileService();
             GingerAction GA = new GingerAction();
 
-            shellService.RunShell(GA, "IP_CONFIG");
+            shellService.RunShell(GA, "IPCONFIG");
 
             fileService.FileInfo(GA, "/home/ginger/dotnet/ThirdPartyNotices.txt");
 

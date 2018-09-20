@@ -6,6 +6,12 @@ namespace GingerShellPlugin
 {
     public class OSCommandMapping
     {
+        public enum CommandList
+        {
+            IPCONFIG = 1,
+            NETSTAT = 2
+        }
+
         public string CommandName { get; set; }
 
         public string CommandParams { get; set; }

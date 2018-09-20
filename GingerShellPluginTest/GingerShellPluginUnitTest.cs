@@ -3,6 +3,7 @@ using GingerShellPlugin;
 using GingerTestHelper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
+using System.Reflection;
 using System.Text;
 
 namespace GingerShellPluginTest
@@ -10,11 +11,18 @@ namespace GingerShellPluginTest
     [TestClass]
     public class GingerShellPluginUnitTest
     {
+        [AssemblyInitialize]
+        public static void AssemblyInitialize(TestContext context)
+        {
+            // Called once when the test assembly is loaded
+            // We provide the assembly to GingerTestHelper.TestResources so it can locate the 'TestResources' folder path
+            // DO NOT DELETE
+            TestResources.Assembly = Assembly.GetExecutingAssembly();
+        }
 
         [ClassInitialize]
         public static void ClassInitialize(TestContext TestContext)
         {
-            //EmptyTempTestsFolder();
         }
 
         [ClassCleanup]
@@ -49,27 +57,37 @@ namespace GingerShellPluginTest
             Assert.AreEqual(null, GA.Errors);
         }
 
-        // create a test folder 
-        // develop few TC's 
 
         [TestMethod]
-        public void TestGingerShell_CheckFilesCount()
+        public void TestGingerShell_RunNetstatCommand()
         {
             //Arrange
-            string tempFolder = TestResources.GetTempFile("") ;
-            tempFolder = tempFolder + "\\ShellTests";
-            string tempFileName = tempFolder + "\\ShellTest1.txt";
+            string command = "NETSTAT";
+            ShellService service = new ShellService();
+            GingerAction gingerAction = new GingerAction();
 
             //Act
-            CreateTempFileContents(tempFileName);
-            //int fileCount = System.IO.Directory.GetFiles(System.IO.Path.GetDirectoryName(fileName)).Length; 
-            int fileCount = System.IO.Directory.GetFiles(tempFolder).Length;
+            service.RunShell(gingerAction, command);
 
             //Assert
-            Assert.AreEqual(fileCount, 1);
+            Assert.AreEqual(gingerAction.Errors, null);
         }
 
 
+        [TestMethod]
+        public void TestGingerShell_RunIPConfigCommand()
+        {
+            //Arrange
+            string command = "IPCONFIG";
+            ShellService service = new ShellService();
+            GingerAction gingerAction = new GingerAction();
+
+            //Act
+            service.RunShell(gingerAction, command);
+
+            //Assert
+            Assert.AreEqual(gingerAction.Errors, null);
+        }
 
 
         private void CreateTempFileContents(string fileName)
@@ -79,23 +97,6 @@ namespace GingerShellPluginTest
             // WriteAllLines creates a file, writes a collection of strings to the file,
             // and then closes the file.  You do NOT need to call Flush() or Close().
             System.IO.File.WriteAllLines(fileName, lines);
-        }
-
-        private static void EmptyTempTestsFolder()
-        {
-            string tempFolder = TestResources.GetTempFile("") + "\\ShellTests";
-            if (System.IO.Directory.Exists(tempFolder))
-            {
-                System.IO.DirectoryInfo directory = new DirectoryInfo(tempFolder);
-                foreach (System.IO.FileInfo file in directory.GetFiles())
-                {
-                    file.Delete();
-                }
-            }
-            else
-            {
-                System.IO.Directory.CreateDirectory(tempFolder);
-            }
         }
 
 

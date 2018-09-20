@@ -72,8 +72,9 @@ namespace GingerShellPlugin
             osCommandMapList.Add(new OSCommandMapping() { CommandName = "FILES_LIST", LinuxSyntax = "ls", MacSyntax = "ls", WindowsSyntax = "dir" });
             osCommandMapList.Add(new OSCommandMapping() { CommandName = "COPY_FILE", LinuxSyntax = "cp", MacSyntax = "cp", WindowsSyntax = "copy" });
             osCommandMapList.Add(new OSCommandMapping() { CommandName = "RENAME_FILE", LinuxSyntax = "mv", MacSyntax = "mv", WindowsSyntax = "rename" });
-            osCommandMapList.Add(new OSCommandMapping() { CommandName = "IP_CONFIG", LinuxSyntax = "ifconfig", MacSyntax = "ifconfig", WindowsSyntax = "ipconfig" });
+            osCommandMapList.Add(new OSCommandMapping() { CommandName = "IPCONFIG", LinuxSyntax = "ifconfig", MacSyntax = "ifconfig", WindowsSyntax = "ipconfig" });
             osCommandMapList.Add(new OSCommandMapping() { CommandName = "CLEAR_SCREEN", LinuxSyntax = "clear", MacSyntax = "clear", WindowsSyntax = "cls" });
+            osCommandMapList.Add(new OSCommandMapping() { CommandName = "NETSTAT", LinuxSyntax = "nestat", MacSyntax = "netstat", WindowsSyntax = "netstat" });
         }
 
         private string GetRelativeOSCommand(string commandName)
