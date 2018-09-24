@@ -11,14 +11,6 @@ namespace GingerShellPluginTest
     [TestClass]
     public class GingerShellPluginUnitTest
     {
-        [AssemblyInitialize]
-        public static void AssemblyInitialize(TestContext context)
-        {
-            // Called once when the test assembly is loaded
-            // We provide the assembly to GingerTestHelper.TestResources so it can locate the 'TestResources' folder path
-            // DO NOT DELETE
-            TestResources.Assembly = Assembly.GetExecutingAssembly();
-        }
 
         [ClassInitialize]
         public static void ClassInitialize(TestContext TestContext)
@@ -41,20 +33,6 @@ namespace GingerShellPluginTest
         public void TestCleanUp()
         {
             //after every test
-        }
-
-        [TestMethod]
-        public void TestGingerShell_RunShell()
-        {
-            //Arrange
-            ShellService service = new ShellService();
-            GingerAction GA = new GingerAction();
-
-            //Act
-            service.RunShell(GA, "IP_CONFIG");
-
-            //Assert
-            Assert.AreEqual(null, GA.Errors);
         }
 
 
@@ -89,16 +67,7 @@ namespace GingerShellPluginTest
             Assert.AreEqual(gingerAction.Errors, null);
         }
 
-
-        private void CreateTempFileContents(string fileName)
-        {
-            // Create a string array that consists of three lines.
-            string[] lines = { "First line", "Second line", "Third line" };
-            // WriteAllLines creates a file, writes a collection of strings to the file,
-            // and then closes the file.  You do NOT need to call Flush() or Close().
-            System.IO.File.WriteAllLines(fileName, lines);
-        }
-
+        
 
     }
 }

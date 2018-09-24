@@ -13,20 +13,12 @@ namespace GingerShellPluginTest
     [TestClass]
     public class FileServiceUnitTest
     {
-
-        [AssemblyInitialize]
-        public static void AssemblyInitialize(TestContext context)
-        {
-            // Called once when the test assembly is loaded
-            // We provide the assembly to GingerTestHelper.TestResources so it can locate the 'TestResources' folder path
-            // DO NOT DELETE
-            TestResources.Assembly = Assembly.GetExecutingAssembly();            
-        }
+        private static string testFolderName = "FileServiceTests";
 
         [ClassInitialize]
         public static void ClassInitialize(TestContext TestContext)
         {
-            EmptyTempFolder("FileServiceTests");
+            EmptyTempFolder();
         }
 
         [ClassCleanup]
@@ -52,7 +44,7 @@ namespace GingerShellPluginTest
         public void TestGingerFileService_CheckFileExists()
         {
             //Arrange
-            string tempFileName = TestResources.GetTempFile("FileServiceTests\\FileServiceFileExists.txt");
+            string tempFileName = TestResources.GetTempFile(testFolderName + "\\FileServiceFileExists.txt");
             FileService service = new FileService();
             GingerAction gingerAct = new GingerAction();
 
@@ -84,16 +76,31 @@ namespace GingerShellPluginTest
         public void TestGingerFileService_CheckFilesCount()
         {
             //Arrange
-            string tempFolder = TestResources.GetTempFile("") + "\\FileServiceTests";
+            string tempFolder = TestResources.GetTempFile("") + "\\" + testFolderName;
             string tempFileName = tempFolder + "\\FileServiceTest1.txt";
 
             //Act
             CreateTempFileContents(tempFileName);
-            //int fileCount = System.IO.Directory.GetFiles(System.IO.Path.GetDirectoryName(fileName)).Length; 
+            //int fileCount = System.IO.Directory.GetFiles(System.IO.Path.GetDirectoryName(tempFileName)).Length; 
             int fileCount = System.IO.Directory.GetFiles(tempFolder).Length;
 
             //Assert
             Assert.AreEqual(fileCount, 1);
+        }
+
+        [TestMethod]
+        public void TestGingerFileService_RunFileInfoCommand()
+        {
+            //Arrange
+            FileService service = new FileService();
+            GingerAction gingerAct = new GingerAction();
+            string tempFileName = TestResources.GetTempFile(testFolderName + "\\FileServiceFileInfo.txt");
+
+            //Act
+            service.FileInfo(gingerAct, tempFileName);
+
+            //Assert
+            Assert.AreEqual(gingerAct.GetOutputValue("FileInfo_Length"), 1);
         }
 
         private void CreateTempFileContents(string fileName)
@@ -106,9 +113,9 @@ namespace GingerShellPluginTest
         }
 
 
-        private static void EmptyTempFolder(string folderName)
+        private static void EmptyTempFolder()
         {
-            string tempFolder = TestResources.GetTempFile("") + "\\" + folderName;
+            string tempFolder = TestResources.GetTempFile("") + "\\" + testFolderName;
             if (System.IO.Directory.Exists(tempFolder))
             {
                 System.IO.DirectoryInfo directory = new DirectoryInfo(tempFolder);
