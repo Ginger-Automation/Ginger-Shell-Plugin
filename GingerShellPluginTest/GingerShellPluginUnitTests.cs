@@ -9,7 +9,7 @@ using System.Text;
 namespace GingerShellPluginTest
 {
     [TestClass]
-    public class GingerShellPluginUnitTest
+    public class GingerShellPluginUnitTests
     {
 
         [ClassInitialize]
@@ -66,7 +66,6 @@ namespace GingerShellPluginTest
             //Assert
             Assert.AreEqual(gingerAction.Errors, null);
         }
-
         
 
     }

@@ -38,8 +38,12 @@ namespace GingerShellPlugin
                 GA.AddOutput("DirInfo", "True");
 
                 System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo(dirName);
+                GA.AddOutput("DirInfo_Parent", directoryInfo.Parent);
+                GA.AddOutput("DirInfo_Root", directoryInfo.Root);
+                GA.AddOutput("DirInfo_Name", directoryInfo.Name);
                 GA.AddOutput("DirInfo_FullName", directoryInfo.FullName);
                 GA.AddOutput("DirInfo_CreationTime", directoryInfo.CreationTime);
+                
             }
             else
             {

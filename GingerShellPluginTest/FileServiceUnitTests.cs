@@ -11,7 +11,7 @@ using System.Text;
 namespace GingerShellPluginTest
 {
     [TestClass]
-    public class FileServiceUnitTest
+    public class FileServiceUnitTests
     {
         private static string testFolderName = "FileServiceTests";
 
@@ -53,7 +53,7 @@ namespace GingerShellPluginTest
             service.FileExists(gingerAct, tempFileName);
 
             //Assert
-            Assert.AreEqual(gingerAct.Errors, null);
+            Assert.IsNull(gingerAct.Errors);
         }
 
 
@@ -85,7 +85,7 @@ namespace GingerShellPluginTest
             int fileCount = System.IO.Directory.GetFiles(tempFolder).Length;
 
             //Assert
-            Assert.AreEqual(fileCount, 1);
+            Assert.IsTrue(fileCount > 0);
         }
 
         [TestMethod]
@@ -97,11 +97,14 @@ namespace GingerShellPluginTest
             string tempFileName = TestResources.GetTempFile(testFolderName + "\\FileServiceFileInfo.txt");
 
             //Act
+            CreateTempFileContents(tempFileName);
             service.FileInfo(gingerAct, tempFileName);
 
             //Assert
-            Assert.AreEqual(gingerAct.GetOutputValue("FileInfo_Length"), 1);
+            Assert.AreEqual(gingerAct.GetOutputValue("FileInfo"), "True");
         }
+
+
 
         private void CreateTempFileContents(string fileName)
         {

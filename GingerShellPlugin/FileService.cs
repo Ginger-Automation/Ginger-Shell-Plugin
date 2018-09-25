@@ -86,6 +86,7 @@ namespace GingerShellPlugin
             if (System.IO.File.Exists(fileName))
             {
                 System.IO.FileInfo fi = new System.IO.FileInfo(fileName);
+                GA.AddOutput("FileInfo", "True");
                 GA.AddOutput("FileInfo_LastAccessTime", fi.LastAccessTime);
                 GA.AddOutput("FileInfo_Length", fi.Length);
                 GA.AddOutput("FileInfo_CreationTime", fi.CreationTime);
