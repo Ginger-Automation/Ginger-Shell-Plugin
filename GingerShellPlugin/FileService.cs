@@ -5,10 +5,6 @@ namespace GingerShellPlugin
     [GingerService("FILESER", "File Service Server")]
     public class FileService : IGingerService, IStandAloneAction
     {
-        public FileService()
-        {
-            //
-        }
 
         [GingerAction("FileExists", "Run File Exists Command")]
         public void FileExists(IGingerAction GA, string fileName)
@@ -72,7 +68,6 @@ namespace GingerShellPlugin
             {
                 GA.AddOutput("FileMove", "False");
             }
-            System.IO.FileInfo fi = new System.IO.FileInfo(sourceFileName);
         }
 
 
@@ -92,7 +87,6 @@ namespace GingerShellPlugin
             {
                 GA.AddOutput("FileInfo", "False");
             }
-
         }
 
 

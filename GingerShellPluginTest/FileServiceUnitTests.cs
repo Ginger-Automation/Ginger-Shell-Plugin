@@ -37,38 +37,40 @@ namespace GingerShellPluginTest
 
 
         [TestMethod]
-        public void TestGingerFileService_CheckFileExists()
+        public void FileService_CheckFileExists()
         {
             //Arrange
             string tempFileName = TestResources.GetTempFile(testFolderName + "\\FileServiceFileExists.txt");
-            FileService service = new FileService();
+            FileService fileService = new FileService();
             GingerAction gingerAct = new GingerAction();
 
             //Act
             CreateTempFileContents(tempFileName);
-            service.FileExists(gingerAct, tempFileName);
+            fileService.FileExists(gingerAct, tempFileName);
 
             //Assert
             Assert.IsNull(gingerAct.Errors);
+            Assert.AreEqual(gingerAct.GetOutputValue("FileExists"), "True");
         }
 
         [TestMethod]
-        public void TestGingerFileService_CheckFileNotExists()
+        public void FileService_CheckFileNotExists()
         {
             //Arrange
-            FileService service = new FileService();
+            FileService fileService = new FileService();
             GingerAction gingerAct = new GingerAction();
             string tempFileName = "TestFileName.txt";
 
             //Act
-            service.FileExists(gingerAct, tempFileName);
+            fileService.FileExists(gingerAct, tempFileName);
 
             //Assert
-            Assert.AreEqual(gingerAct.Errors, null);
+            Assert.IsNull(gingerAct.Errors);
+            Assert.AreEqual(gingerAct.GetOutputValue("FileExists"), "False");            
         }
 
         [TestMethod]
-        public void TestGingerFileService_CheckFilesCount()
+        public void FileService_CheckFilesCount()
         {
             //Arrange
             string tempFolder = TestResources.GetTempFile("") + "\\" + testFolderName;
@@ -84,19 +86,56 @@ namespace GingerShellPluginTest
         }
 
         [TestMethod]
-        public void TestGingerFileService_RunFileInfoCommand()
+        public void FileService_TestFileInfo()
         {
             //Arrange
-            FileService service = new FileService();
+            FileService fileService = new FileService();
             GingerAction gingerAct = new GingerAction();
             string tempFileName = TestResources.GetTempFile(testFolderName + "\\FileServiceFileInfo.txt");
 
             //Act
             CreateTempFileContents(tempFileName);
-            service.FileInfo(gingerAct, tempFileName);
+            fileService.FileInfo(gingerAct, tempFileName);
 
             //Assert
+            Assert.IsNull(gingerAct.Errors);
             Assert.AreEqual(gingerAct.GetOutputValue("FileInfo"), "True");
+        }
+
+        [TestMethod]
+        public void FileService_TestFileCopy()
+        {
+            //Arrange
+            FileService fileService = new FileService();
+            GingerAction gingerAct = new GingerAction();
+            string sourFileName = TestResources.GetTempFile(testFolderName + "\\FileServiceCopySourceFile.txt");
+            string destFileName = TestResources.GetTempFile(testFolderName + "\\FileServiceCopyDestFile.txt");
+
+            //Act
+            CreateTempFileContents(sourFileName);
+            fileService.FileCopy(gingerAct, sourFileName, destFileName);
+
+            //Assert
+            Assert.IsNull(gingerAct.Errors);
+            Assert.AreEqual(gingerAct.GetOutputValue("FileCopy"), "True");
+        }
+
+        [TestMethod]
+        public void FileService_TestFileMove()
+        {
+            //Arrange
+            FileService fileService = new FileService();
+            GingerAction gingerAct = new GingerAction();
+            string sourceFileName = TestResources.GetTempFile(testFolderName + "\\FileServiceMoveSourceFile.txt");
+            string destFileName = TestResources.GetTempFile(testFolderName + "\\FileServiceMoveDestFile.txt");
+
+            //Act
+            CreateTempFileContents(sourceFileName);
+            fileService.FileMove(gingerAct, sourceFileName, destFileName);
+
+            //Assert
+            Assert.IsNull(gingerAct.Errors);
+            Assert.AreEqual(gingerAct.GetOutputValue("FileMove"), "True");
         }
 
         private void CreateTempFileContents(string fileName)

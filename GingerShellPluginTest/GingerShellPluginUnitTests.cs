@@ -33,7 +33,7 @@ namespace GingerShellPluginTest
 
 
         [TestMethod]
-        public void TestGingerShell_RunNetstatCommand()
+        public void ShellService_RunNetstatCommand()
         {
             //Arrange
             string command = "NETSTAT";
@@ -49,7 +49,7 @@ namespace GingerShellPluginTest
 
 
         [TestMethod]
-        public void TestGingerShell_RunIPConfigCommand()
+        public void ShellService_RunIPConfigCommand()
         {
             //Arrange
             string command = "IPCONFIG";
@@ -64,7 +64,7 @@ namespace GingerShellPluginTest
         }
 
         [TestMethod]
-        public void TestGingerShell_RunFilesListCommand()
+        public void ShellService_RunFilesListCommand()
         {
             //Arrange
             string command = "FILES_LIST";
@@ -79,7 +79,7 @@ namespace GingerShellPluginTest
         }
 
         [TestMethod]
-        public void TestGingerShell_ValidateWindowsOS()
+        public void ShellService_ValidateWindowsOS()
         {
             //Arrange
             string command = "CLEAR_SCREEN";

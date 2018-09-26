@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Reflection;
 
-namespace GingerAutoPilotTest
+namespace GingerShellPluginTest
 {
     [TestClass]
     public class TestAssemblyInit

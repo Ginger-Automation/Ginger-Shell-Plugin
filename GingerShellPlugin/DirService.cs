@@ -5,10 +5,6 @@ namespace GingerShellPlugin
     [GingerService("DIRSERV", "Dir Service Server")]
     public class DirService : IGingerService, IStandAloneAction
     {
-        public DirService()
-        {
-            //
-        }
 
         [GingerAction("DirExists", "Check Dir Exists")]
         public void DirExists(IGingerAction GA, string dirName)
@@ -62,6 +58,27 @@ namespace GingerShellPlugin
             else
             {
                 GA.AddOutput("DirDelete", "False");
+            }
+        }
+
+        [GingerAction("DirList", "List Directory")]
+        public void DirList(IGingerAction GA, string dirName)
+        {
+            GA.AddOutput("DirName", dirName);
+            if (System.IO.Directory.Exists(dirName))
+            {
+                string[] filesList = System.IO.Directory.GetFiles(dirName);
+                int fileNum = 0;
+                foreach (string curFile in filesList)
+                {
+                    GA.AddOutput("File-" + (++fileNum), curFile);
+                }
+                GA.AddOutput("FileCount", fileNum.ToString());
+                GA.AddOutput("DirList", "True");
+            }
+            else
+            {
+                GA.AddOutput("DirList", "False");
             }
         }
 
