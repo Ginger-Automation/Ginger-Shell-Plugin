@@ -1,20 +1,16 @@
 ﻿using Amdocs.Ginger.Plugin.Core;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GingerShellPlugin
 {
     [GingerService("DIRSERV", "Dir Service Server")]
     public class DirService : IGingerService, IStandAloneAction
     {
-
         public DirService()
         {
             //
         }
 
-        [GingerAction("DirExists", "Run OS Shell Command")]
+        [GingerAction("DirExists", "Check Dir Exists")]
         public void DirExists(IGingerAction GA, string dirName)
         {
             GA.AddOutput("DirName", dirName);
@@ -29,7 +25,7 @@ namespace GingerShellPlugin
         }
 
 
-        [GingerAction("DirInfo", "Run OS Shell Command")]
+        [GingerAction("DirInfo", "Run Dir Info Command")]
         public void DirInfo(IGingerAction GA, string dirName)
         {
             GA.AddOutput("DirName", dirName);
@@ -42,12 +38,30 @@ namespace GingerShellPlugin
                 GA.AddOutput("DirInfo_Root", directoryInfo.Root);
                 GA.AddOutput("DirInfo_Name", directoryInfo.Name);
                 GA.AddOutput("DirInfo_FullName", directoryInfo.FullName);
-                GA.AddOutput("DirInfo_CreationTime", directoryInfo.CreationTime);
-                
+                GA.AddOutput("DirInfo_CreationTime", directoryInfo.CreationTime);                
             }
             else
             {
                 GA.AddOutput("DirInfo", "False");
+            }
+
+
+            System.IO.Directory.Delete(dirName);
+        }
+
+
+        [GingerAction("DirDelete", "Delete Directory")]
+        public void DirDelete(IGingerAction GA, string dirName)
+        {
+            GA.AddOutput("DirName", dirName);
+            if (System.IO.Directory.Exists(dirName))
+            {
+                System.IO.Directory.Delete(dirName);
+                GA.AddOutput("DirDelete", "True");
+            }
+            else
+            {
+                GA.AddOutput("DirDelete", "False");
             }
         }
 

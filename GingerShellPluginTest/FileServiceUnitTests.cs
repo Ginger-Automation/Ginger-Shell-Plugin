@@ -2,11 +2,7 @@
 using GingerShellPlugin;
 using GingerTestHelper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
-using System.Text;
 
 namespace GingerShellPluginTest
 {
@@ -56,7 +52,6 @@ namespace GingerShellPluginTest
             Assert.IsNull(gingerAct.Errors);
         }
 
-
         [TestMethod]
         public void TestGingerFileService_CheckFileNotExists()
         {
@@ -104,8 +99,6 @@ namespace GingerShellPluginTest
             Assert.AreEqual(gingerAct.GetOutputValue("FileInfo"), "True");
         }
 
-
-
         private void CreateTempFileContents(string fileName)
         {
             // Create a string array that consists of three lines.
@@ -114,7 +107,6 @@ namespace GingerShellPluginTest
             // and then closes the file.  You do NOT need to call Flush() or Close().
             System.IO.File.WriteAllLines(fileName, lines);
         }
-
 
         private static void EmptyTempFolder()
         {

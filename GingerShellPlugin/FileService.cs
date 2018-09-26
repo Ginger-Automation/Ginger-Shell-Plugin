@@ -1,7 +1,4 @@
 ﻿using Amdocs.Ginger.Plugin.Core;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GingerShellPlugin
 {
@@ -13,7 +10,7 @@ namespace GingerShellPlugin
             //
         }
 
-        [GingerAction("FileExists", "Run OS Shell Command")]
+        [GingerAction("FileExists", "Run File Exists Command")]
         public void FileExists(IGingerAction GA, string fileName)
         {
             GA.AddOutput("FileName", fileName);
@@ -28,7 +25,7 @@ namespace GingerShellPlugin
         }
 
 
-        [GingerAction("FileDelete", "Run OS Shell Command")]
+        [GingerAction("FileDelete", "Run File Delete Command")]
         public void FileDelete(IGingerAction GA, string fileName)
         {
             GA.AddOutput("FileName", fileName);
@@ -44,7 +41,7 @@ namespace GingerShellPlugin
         }
 
 
-        [GingerAction("FileCopy", "Run OS Shell Command")]
+        [GingerAction("FileCopy", "Run File Copy Command")]
         public void FileCopy(IGingerAction GA, string sourceFileName, string destFileName)
         {
             GA.AddOutput("SourceFileName", sourceFileName);
@@ -61,7 +58,7 @@ namespace GingerShellPlugin
         }
 
 
-        [GingerAction("FileMove", "Run OS Shell Command")]
+        [GingerAction("FileMove", "Run File Move Command")]
         public void FileMove(IGingerAction GA, string sourceFileName, string destFileName)
         {
             GA.AddOutput("SourceFileName", sourceFileName);
@@ -79,7 +76,7 @@ namespace GingerShellPlugin
         }
 
 
-        [GingerAction("FileInfo", "Run OS Shell Command")]
+        [GingerAction("FileInfo", "Run File Info Command")]
         public void FileInfo(IGingerAction GA, string fileName)
         {
             GA.AddOutput("FileName", fileName);
@@ -97,8 +94,6 @@ namespace GingerShellPlugin
             }
 
         }
-
-
 
 
     }

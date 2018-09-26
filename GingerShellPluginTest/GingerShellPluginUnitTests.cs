@@ -1,10 +1,6 @@
 using Amdocs.Ginger.Plugin.Core;
 using GingerShellPlugin;
-using GingerTestHelper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.IO;
-using System.Reflection;
-using System.Text;
 
 namespace GingerShellPluginTest
 {
@@ -48,7 +44,7 @@ namespace GingerShellPluginTest
             service.RunShell(gingerAction, command);
 
             //Assert
-            Assert.AreEqual(gingerAction.Errors, null);
+            Assert.IsNull(gingerAction.Errors);
         }
 
 
@@ -64,9 +60,38 @@ namespace GingerShellPluginTest
             service.RunShell(gingerAction, command);
 
             //Assert
-            Assert.AreEqual(gingerAction.Errors, null);
+            Assert.IsNull(gingerAction.Errors);
         }
-        
+
+        [TestMethod]
+        public void TestGingerShell_RunFilesListCommand()
+        {
+            //Arrange
+            string command = "FILES_LIST";
+            ShellService service = new ShellService();
+            GingerAction gingerAction = new GingerAction();
+
+            //Act
+            service.RunShell(gingerAction, command);
+
+            //Assert
+            Assert.IsNull(gingerAction.Errors);
+        }
+
+        [TestMethod]
+        public void TestGingerShell_ValidateWindowsOS()
+        {
+            //Arrange
+            string command = "CLEAR_SCREEN";
+            ShellService service = new ShellService();
+            GingerAction gingerAction = new GingerAction();
+
+            //Act
+            service.RunShell(gingerAction, command);
+
+            //Assert
+            Assert.AreEqual(gingerAction.GetOutputValue("curr_os"), "windows");
+        }
 
     }
 }
