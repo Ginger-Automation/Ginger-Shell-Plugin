@@ -79,18 +79,19 @@ namespace GingerShellPluginTest
         }
 
         [TestMethod]
-        public void ShellService_ValidateWindowsOS()
+        public void ShellService_ValidateOS()
         {
             //Arrange
             string command = "CLEAR_SCREEN";
             ShellService service = new ShellService();
             GingerAction gingerAction = new GingerAction();
+            string targetOS = OperatingSystem.GetCurrentOS();
 
             //Act
             service.RunShell(gingerAction, command);
 
             //Assert
-            Assert.AreEqual(gingerAction.GetOutputValue("curr_os"), "windows");
+            Assert.AreEqual(gingerAction.GetOutputValue("curr_os"), targetOS);
         }
 
     }

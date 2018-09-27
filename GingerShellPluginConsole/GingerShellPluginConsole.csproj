@@ -9,4 +9,16 @@
     <ProjectReference Include="..\GingerShellPlugin\GingerShellPlugin.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="GingerCoreNET">
+      <HintPath>GingerCoreNET.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Ginger.PluginPackage.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

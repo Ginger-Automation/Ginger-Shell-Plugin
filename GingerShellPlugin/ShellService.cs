@@ -64,13 +64,12 @@ namespace GingerShellPlugin
 
             Console.WriteLine("Output from the execution...");
             Console.Write(retOutput);
-
         }
 
         private void PopulateOSCommandMapping()
         {
             osCommandMapList.Add(new OSCommandMapping() { CommandName = "IPCONFIG", LinuxSyntax = "ifconfig", MacSyntax = "ifconfig", WindowsSyntax = "ipconfig" });
-            osCommandMapList.Add(new OSCommandMapping() { CommandName = "NETSTAT", LinuxSyntax = "nestat", MacSyntax = "netstat", WindowsSyntax = "netstat" });
+            osCommandMapList.Add(new OSCommandMapping() { CommandName = "NETSTAT", LinuxSyntax = "netstat", MacSyntax = "netstat", WindowsSyntax = "netstat" });
             osCommandMapList.Add(new OSCommandMapping() { CommandName = "FILES_LIST", LinuxSyntax = "ls", MacSyntax = "ls", WindowsSyntax = "dir" });
             osCommandMapList.Add(new OSCommandMapping() { CommandName = "COPY_FILE", LinuxSyntax = "cp", MacSyntax = "cp", WindowsSyntax = "copy" });
             osCommandMapList.Add(new OSCommandMapping() { CommandName = "RENAME_FILE", LinuxSyntax = "mv", MacSyntax = "mv", WindowsSyntax = "rename" });
@@ -98,6 +97,10 @@ namespace GingerShellPlugin
             // Use process
             Process process;
 
+            Console.WriteLine("Execute Shell Command...");
+            Console.WriteLine("Command: [" + commandExecutable + "]");
+            Console.WriteLine("Command Parameters: [" + commandArguments + "]");
+
             try
             {
                 // Setup our process with the executable and it's arguments
@@ -110,7 +113,6 @@ namespace GingerShellPlugin
                 {
                     process.StartInfo = new ProcessStartInfo(commandExecutable, commandArguments);
                 }
-
 
                 // To get IO streams set use shell to false
                 process.StartInfo.UseShellExecute = false;
@@ -165,6 +167,10 @@ namespace GingerShellPlugin
 
             // Use process
             Process process;
+
+            Console.WriteLine("Execute Shell Command - Windows...");
+            Console.WriteLine("Command: [" + commandStr + "]");
+            Console.WriteLine("Command Parameters: [" + commandArguments + "]");
 
             try
             {

@@ -18,9 +18,9 @@ namespace GingerShellPlugin
         public static string GetCurrentOS()
         {
             return
-            (IsWindows() ? "win" : null) ??
+            (IsWindows() ? "windows" : null) ??
             (IsMacOS() ? "mac" : null) ??
-            (IsLinux() ? "unix" : null);
+            (IsLinux() ? "linux" : null);
         }
     }
 

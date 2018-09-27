@@ -40,7 +40,7 @@ namespace GingerShellPluginTest
         public void FileService_CheckFileExists()
         {
             //Arrange
-            string tempFileName = TestResources.GetTempFile(testFolderName + "\\FileServiceFileExists.txt");
+            string tempFileName = Path.Combine(TestResources.GetTempFile(""), testFolderName, "FileServiceFileExists.txt");
             FileService fileService = new FileService();
             GingerAction gingerAct = new GingerAction();
 
@@ -73,8 +73,8 @@ namespace GingerShellPluginTest
         public void FileService_CheckFilesCount()
         {
             //Arrange
-            string tempFolder = TestResources.GetTempFile("") + "\\" + testFolderName;
-            string tempFileName = tempFolder + "\\FileServiceTest1.txt";
+            string tempFolder = Path.Combine(TestResources.GetTempFile(""), testFolderName);
+            string tempFileName = Path.Combine(tempFolder, "FileServiceTest1.txt");
 
             //Act
             CreateTempFileContents(tempFileName);
@@ -91,7 +91,7 @@ namespace GingerShellPluginTest
             //Arrange
             FileService fileService = new FileService();
             GingerAction gingerAct = new GingerAction();
-            string tempFileName = TestResources.GetTempFile(testFolderName + "\\FileServiceFileInfo.txt");
+            string tempFileName = Path.Combine(TestResources.GetTempFile(""), testFolderName, "FileServiceFileInfo.txt");
 
             //Act
             CreateTempFileContents(tempFileName);
@@ -108,12 +108,13 @@ namespace GingerShellPluginTest
             //Arrange
             FileService fileService = new FileService();
             GingerAction gingerAct = new GingerAction();
-            string sourFileName = TestResources.GetTempFile(testFolderName + "\\FileServiceCopySourceFile.txt");
-            string destFileName = TestResources.GetTempFile(testFolderName + "\\FileServiceCopyDestFile.txt");
+            string sourceFileName = Path.Combine(TestResources.GetTempFile(""), testFolderName, "FileServiceCopySourceFile.txt");
+            string destFileName = Path.Combine(TestResources.GetTempFile(""), testFolderName, "FileServiceCopyDestFile.txt"); ;
+
 
             //Act
-            CreateTempFileContents(sourFileName);
-            fileService.FileCopy(gingerAct, sourFileName, destFileName);
+            CreateTempFileContents(sourceFileName);
+            fileService.FileCopy(gingerAct, sourceFileName, destFileName);
 
             //Assert
             Assert.IsNull(gingerAct.Errors);
@@ -126,8 +127,8 @@ namespace GingerShellPluginTest
             //Arrange
             FileService fileService = new FileService();
             GingerAction gingerAct = new GingerAction();
-            string sourceFileName = TestResources.GetTempFile(testFolderName + "\\FileServiceMoveSourceFile.txt");
-            string destFileName = TestResources.GetTempFile(testFolderName + "\\FileServiceMoveDestFile.txt");
+            string sourceFileName = Path.Combine(TestResources.GetTempFile(""), testFolderName, "FileServiceMoveSourceFile.txt");
+            string destFileName = Path.Combine(TestResources.GetTempFile(""), testFolderName, "FileServiceMoveDestFile.txt"); ;
 
             //Act
             CreateTempFileContents(sourceFileName);
@@ -149,7 +150,7 @@ namespace GingerShellPluginTest
 
         private static void EmptyTempFolder()
         {
-            string tempFolder = TestResources.GetTempFile("") + "\\" + testFolderName;
+            string tempFolder = Path.Combine(TestResources.GetTempFile(""), testFolderName);
             if (System.IO.Directory.Exists(tempFolder))
             {
                 System.IO.DirectoryInfo directory = new DirectoryInfo(tempFolder);

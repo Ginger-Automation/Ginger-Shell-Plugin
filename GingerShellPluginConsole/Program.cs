@@ -1,4 +1,6 @@
-﻿using Amdocs.Ginger.Plugin.Core;
+﻿using Amdocs.Ginger.CoreNET.Drivers.CommunicationProtocol;
+using Amdocs.Ginger.Plugin.Core;
+using GingerCoreNET.DriversLib;
 using GingerShellPlugin;
 using System;
 
@@ -8,15 +10,20 @@ namespace GingerShellPluginConsole
     {
         static void Main(string[] args)
         {
-
             Console.WriteLine("Running Shell Plugin");
-            ShellService shellService = new ShellService();
-            FileService fileService = new FileService();
-            GingerAction GA = new GingerAction();
 
-            shellService.RunShell(GA, "IPCONFIG");
+            GingerNode gingerNode = new GingerNode(new ShellService());
+            gingerNode.StartGingerNode("SHELL 1", SocketHelper.GetLocalHostIP(), 15001);
 
-            fileService.FileInfo(GA, "/home/ginger/dotnet/ThirdPartyNotices.txt");
+            Console.ReadKey();
+
+            //ShellService shellService = new ShellService();
+            //FileService fileService = new FileService();
+            //GingerAction GA = new GingerAction();
+
+            //shellService.RunShell(GA, "IPCONFIG");
+
+            //fileService.FileInfo(GA, "/home/ginger/dotnet/ThirdPartyNotices.txt");
 
             // C:\Users\raviket>dotnet C:\Users\raviket\Source\Repos\GingerShellPlugin\GingerShellPluginConsole\bin\Debug\netcoreapp2.1\GingerShellPluginConsole.dll
         }

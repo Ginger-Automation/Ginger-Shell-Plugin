@@ -36,6 +36,22 @@ namespace GingerShellPluginTest
         }
 
         [TestMethod]
+        public void DirService_CheckDirExists()
+        {
+            //Arrange
+            string tempFolder = TestResources.GetTempFolder(testFolderName);
+            DirService dirService = new DirService();
+            GingerAction gingerAct = new GingerAction();
+
+            //Act
+            dirService.DirExists(gingerAct, tempFolder);
+
+            //Assert
+            Assert.AreEqual(gingerAct.GetOutputValue("DirExists"), "True");
+        }
+
+
+        [TestMethod]
         public void DirService_RunDirInfoCommand()
         {
             //Arrange
@@ -53,22 +69,6 @@ namespace GingerShellPluginTest
         }
 
         [TestMethod]
-        public void DirService_CheckDirExists()
-        {
-            //Arrange
-            string tempFolder = TestResources.GetTempFolder(testFolderName);
-            DirService dirService = new DirService();
-            GingerAction gingerAct = new GingerAction();
-
-            //Act
-            dirService.DirExists(gingerAct, tempFolder);
-
-            //Assert
-            Assert.AreEqual(gingerAct.GetOutputValue("DirExists"), "True");
-        }
-
-
-        [TestMethod]
         public void DirService_DirList()
         {
             //Arrange
@@ -76,8 +76,8 @@ namespace GingerShellPluginTest
             DirService dirService = new DirService();
             GingerAction gingerAct = new GingerAction();
             
-            string tempFile1 = TestResources.GetTempFile(testFolderName + "\\test1.txt");
-            string tempFile2 = TestResources.GetTempFile(testFolderName + "\\test2.txt");
+            string tempFile1 = Path.Combine(tempFolder, "test1.txt");
+            string tempFile2 = Path.Combine(tempFolder, "test2.txt");
 
             //Act
             CreateTempFileContents(tempFile1);
@@ -96,8 +96,8 @@ namespace GingerShellPluginTest
             DirService dirService = new DirService();
             GingerAction gingerAct = new GingerAction();
 
-            string tempFile1 = TestResources.GetTempFile(testFolderName + "\\test1.txt");
-            string tempFile2 = TestResources.GetTempFile(testFolderName + "\\test2.txt");
+            string tempFile1 = Path.Combine(tempFolder, "test1.txt");
+            string tempFile2 = Path.Combine(tempFolder, "test2.txt");
 
             //Act
             CreateTempFileContents(tempFile1);
@@ -110,7 +110,7 @@ namespace GingerShellPluginTest
 
         private static void EmptyTempFolder()
         {
-            string tempFolder = TestResources.GetTempFile("") + "\\" + testFolderName;
+            string tempFolder = Path.Combine(TestResources.GetTempFile(""), testFolderName);
             if (System.IO.Directory.Exists(tempFolder))
             {
                 System.IO.DirectoryInfo directory = new DirectoryInfo(tempFolder);
