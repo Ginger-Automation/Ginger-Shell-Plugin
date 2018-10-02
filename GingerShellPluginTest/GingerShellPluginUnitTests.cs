@@ -91,7 +91,7 @@ namespace GingerShellPluginTest
             service.RunShell(gingerAction, command);
 
             //Assert
-            Assert.AreEqual(gingerAction.GetOutputValue("curr_os"), targetOS);
+            Assert.AreEqual(targetOS, gingerAction.Output["curr_os"]);
         }
 
     }

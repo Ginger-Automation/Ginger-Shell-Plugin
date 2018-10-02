@@ -50,7 +50,7 @@ namespace GingerShellPluginTest
 
             //Assert
             Assert.IsNull(gingerAct.Errors);
-            Assert.AreEqual(gingerAct.GetOutputValue("FileExists"), "True");
+            Assert.AreEqual("True", gingerAct.Output["FileExists"], "FileExists=true");
         }
 
         [TestMethod]
@@ -66,7 +66,7 @@ namespace GingerShellPluginTest
 
             //Assert
             Assert.IsNull(gingerAct.Errors);
-            Assert.AreEqual(gingerAct.GetOutputValue("FileExists"), "False");            
+            Assert.AreEqual("False", gingerAct.Output["FileExists"], "FileExists=false");            
         }
 
         [TestMethod]
@@ -99,7 +99,7 @@ namespace GingerShellPluginTest
 
             //Assert
             Assert.IsNull(gingerAct.Errors);
-            Assert.AreEqual(gingerAct.GetOutputValue("FileInfo"), "True");
+            Assert.AreEqual("True", gingerAct.Output["FileInfo"]);
         }
 
         [TestMethod]
@@ -118,7 +118,7 @@ namespace GingerShellPluginTest
 
             //Assert
             Assert.IsNull(gingerAct.Errors);
-            Assert.AreEqual(gingerAct.GetOutputValue("FileCopy"), "True");
+            Assert.AreEqual(true, gingerAct.Output["FileCopy"]);
         }
 
         [TestMethod]
@@ -136,7 +136,7 @@ namespace GingerShellPluginTest
 
             //Assert
             Assert.IsNull(gingerAct.Errors);
-            Assert.AreEqual(gingerAct.GetOutputValue("FileMove"), "True");
+            Assert.AreEqual(true, gingerAct.Output["FileMove"]);
         }
 
         private void CreateTempFileContents(string fileName)

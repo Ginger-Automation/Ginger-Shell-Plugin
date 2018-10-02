@@ -12,8 +12,10 @@ namespace GingerShellPluginConsole
         {
             Console.WriteLine("Running Shell Plugin");
 
-            GingerNode gingerNode = new GingerNode(new ShellService());
-            gingerNode.StartGingerNode("SHELL 1", SocketHelper.GetLocalHostIP(), 15001);
+            GingerNodeStarter.StartNode(new ShellService(), "SHELL 1");
+
+            //GingerNode gingerNode = new GingerNode(new ShellService());
+            //gingerNode.StartGingerNode("SHELL 1", SocketHelper.GetLocalHostIP(), 15001);
 
             Console.ReadKey();
 

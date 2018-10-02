@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GingerShellPlugin\GingerShellPlugin.csproj" />
+    <PackageReference Include="Ginger.Plugin.Core" Version="2.6.6" />
   </ItemGroup>
 
   <ItemGroup>

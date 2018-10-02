@@ -39,7 +39,7 @@ namespace GingerShellPluginTest
         public void DirService_CheckDirExists()
         {
             //Arrange
-            string tempFolder = TestResources.GetTempFolder(testFolderName);
+            string tempFolder = TestResources.getGingerUnitTesterTempFolder(testFolderName);
             DirService dirService = new DirService();
             GingerAction gingerAct = new GingerAction();
 
@@ -47,7 +47,7 @@ namespace GingerShellPluginTest
             dirService.DirExists(gingerAct, tempFolder);
 
             //Assert
-            Assert.AreEqual(gingerAct.GetOutputValue("DirExists"), "True");
+            Assert.AreEqual("True", gingerAct.Output["DirExists"], "DirExists=True");
         }
 
 
@@ -64,15 +64,15 @@ namespace GingerShellPluginTest
             dirService.DirInfo(gingerAct, tempFolder);
 
             //Assert
-            Assert.IsNotNull(gingerAct.GetOutputValue("DirInfo_Root"));
-            Assert.AreEqual(gingerAct.GetOutputValue("DirInfo_Name"), testFolderName);
+            Assert.IsNotNull(gingerAct.Output["DirInfo_Root"], "DirInfo_Root is not null");
+            Assert.AreEqual(testFolderName, gingerAct.Output["DirInfo_Name"] );
         }
 
         [TestMethod]
         public void DirService_DirList()
         {
             //Arrange
-            string tempFolder = TestResources.GetTempFolder(testFolderName);
+            string tempFolder = TestResources.getGingerUnitTesterTempFolder(testFolderName);
             DirService dirService = new DirService();
             GingerAction gingerAct = new GingerAction();
             
@@ -85,14 +85,14 @@ namespace GingerShellPluginTest
             dirService.DirList(gingerAct, tempFolder);
 
             //Assert
-            Assert.AreEqual(gingerAct.GetOutputValue("DirList"), "True");
+            Assert.AreEqual(true, gingerAct.Output["DirList"]);
         }
 
         [TestMethod]
         public void DirService_DirListFileCount()
         {
             //Arrange
-            string tempFolder = TestResources.GetTempFolder(testFolderName);
+            string tempFolder = TestResources.getGingerUnitTesterTempFolder(testFolderName);
             DirService dirService = new DirService();
             GingerAction gingerAct = new GingerAction();
 
@@ -105,7 +105,7 @@ namespace GingerShellPluginTest
             dirService.DirList(gingerAct, tempFolder);
 
             //Assert
-            Assert.AreEqual(gingerAct.GetOutputValue("FileCount"), "2");
+            Assert.AreEqual(2, gingerAct.Output["FileCount"], "FileCount=2");
         }
 
         private static void EmptyTempFolder()
