@@ -85,7 +85,7 @@ namespace GingerShellPluginTest
             dirService.DirList(gingerAct, tempFolder);
 
             //Assert
-            Assert.AreEqual(true, gingerAct.Output["DirList"]);
+            Assert.AreEqual("True", gingerAct.Output["DirList"]);
         }
 
         [TestMethod]
@@ -105,7 +105,7 @@ namespace GingerShellPluginTest
             dirService.DirList(gingerAct, tempFolder);
 
             //Assert
-            Assert.AreEqual(2, gingerAct.Output["FileCount"], "FileCount=2");
+            Assert.AreEqual("2", gingerAct.Output["FileCount"], "FileCount=2");
         }
 
         private static void EmptyTempFolder()
