@@ -1,5 +1,5 @@
 language: csharp
-solution: GingerShellPlugin.sln
+solution: ./GingerShellPlugin.sln
 install:
   - sudo apt-get install -y gtk-sharp2
   - nuget restore GingerShellPlugin.sln
