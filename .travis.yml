@@ -1,0 +1,8 @@
+language: csharp
+solution: GingerShellPlugin.sln
+install:
+  - sudo apt-get install -y gtk-sharp2
+  - nuget restore GingerShellPlugin.sln
+  matrix:
+  include:
+    - dotnet: 2.1
