@@ -1,7 +1,18 @@
+dist: trusty
+sudo: required
 language: csharp
-solution: GingerShellPlugin.sln
-install:
-- sudo apt-get install -y gtk-sharp2
-- nuget restore solution-name.sln
 mono: none
-dotnet: 2.1
+dotnet: 2.0.0
+solution: GingerShellPlugin.sln
+script:
+  - cd GingerShellPluginConsole
+  - dotnet restore
+  - dotnet build -c Release
+
+#language: csharp
+#solution: GingerShellPlugin.sln
+#install:
+#- sudo apt-get install -y gtk-sharp2
+#- nuget restore solution-name.sln
+#mono: none
+#dotnet: 2.1
