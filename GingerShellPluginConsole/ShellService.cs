@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace GingerShellPlugin
 {
@@ -16,14 +18,10 @@ namespace GingerShellPlugin
             PopulateOSCommandMapping();
         }
 
-        [GingerAction("RunShell", "Run OS Shell Command")]
-        public void RunShell(IGingerAction GA, string commandStr)
-        {
-            this.RunShell(GA, commandStr, string.Empty);
-        }
+       
 
         [GingerAction("RunShell", "Run OS Shell Command")]
-        public void RunShell(IGingerAction GA, string commandStr, string commandParams)
+        public void RunShell(IGingerAction GA, string commandStr, string commandParams = null)
         {
             string retOutput = string.Empty;
             string currOS = string.Empty;
@@ -51,8 +49,8 @@ namespace GingerShellPlugin
             {
                 //windows code
                 Console.WriteLine("Windows Operating System!");
-                currOS = "windows";
-                retOutput = ExecuteShellCommandWindows(osCommandStr, commandParams, true, true, false);
+                currOS = "windows";                
+                retOutput = ExecuteShellCommandWindows(osCommandStr, commandParams, true, true, false);                
             } else
             {
                 GA.AddError("OS not supported");
@@ -61,6 +59,7 @@ namespace GingerShellPlugin
 
             GA.AddExInfo(retOutput);
             GA.AddOutput("curr_os", currOS);
+            GA.AddOutput("output", retOutput);
 
             Console.WriteLine("Output from the execution...");
             Console.Write(retOutput);
@@ -163,7 +162,7 @@ namespace GingerShellPlugin
         {
             // This will be out return string
             string standardOutputString = string.Empty;
-            string standardErrorString = string.Empty;
+            string standardErrorString = string.Empty; // TODO: read err and add to action err
 
             // Use process
             Process process;
@@ -175,8 +174,7 @@ namespace GingerShellPlugin
             try
             {
                 // Setup our process with the executable and it's arguments
-                process = new Process();
-
+                process = new Process();                
                 process.StartInfo.FileName= "cmd.exe";
 
                 // To get IO streams set use shell to false

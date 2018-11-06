@@ -3,5 +3,7 @@
   "Version": "1.0.0",
   "ProjectUrl": "git\\Shell...",
   "Description": "Shell",
-  "Summary": "Shell can simulate and ..."
+  "Summary": "Shell can simulate and ...",
+  "StartupDLL": "GingerShellPluginConsole.dll",
+  "UIDLL": ""
 }
